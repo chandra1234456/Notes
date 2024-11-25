@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Normal State -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/white" />
+            <corners android:radius="10dp" />
+            <stroke android:width="2dp" android:color="#091057" />
+        </shape>
+    </item>
+
+    <!-- Focused State -->
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/white" />
+            <corners android:radius="10dp" />
+            <stroke android:width="2dp" android:color="@color/blue" /> <!-- Optional: Different color when focused -->
+        </shape>
+    </item>
+
+    <!-- Disabled State -->
+    <item android:state_enabled="false">
+        <shape android:shape="rectangle">
+            <solid android:color="#E0E0E0" /> <!-- Light gray background when disabled -->
+            <corners android:radius="10dp" />
+            <stroke android:width="2dp" android:color="#B0B0B0" /> <!-- Gray border when disabled -->
+        </shape>
+    </item>
+</selector>
