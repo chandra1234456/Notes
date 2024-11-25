@@ -27,6 +27,13 @@ android {
                     "proguard-rules.pro"
                          )
         }
+        debug {
+            isDebuggable = true
+            proguardFiles(
+                    getDefaultProguardFile("proguard-android-optimize.txt") ,
+                    "proguard-rules.pro"
+                         )
+        }
     }
     viewBinding.enable = true
     compileOptions {

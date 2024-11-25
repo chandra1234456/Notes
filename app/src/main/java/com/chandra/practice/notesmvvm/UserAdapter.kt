@@ -1,9 +1,6 @@
 package com.chandra.practice.notesmvvm
 
-import android.app.AlarmManager
-import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import com.chandra.practice.notesmvvm.notification.NotificationReceiver
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textview.MaterialTextView
 import java.time.LocalDateTime
@@ -46,14 +42,14 @@ class UserAdapter(private var listner : OnItemClickLister,val context : Context)
             noteDescription.text = user.noteDescription
             noteDate.text = extractDate(user.timeStamp)
             Log.d("TAG" , "bind: ${user.remainderMe}")
-            remainderMe.apply {
+            /*remainderMe.apply {
                 visibility = if (user.remainderMe == "Remained Me") View.GONE else View.VISIBLE
                 text = user.remainderMe
-            }
+            }*/
             isEdited.apply {
                 visibility = if (user.isEdited) View.VISIBLE else View.GONE
             }
-            val text =getTimeGapMessage(user.timeStamp)
+            val text = getTimeGapMessage(user.timeStamp)
             if (text=="Just now"){
                 noteTimeStamp.text = getTimeGapMessage(user.timeStamp)
                 ivTimeStamp.visibility = View.VISIBLE
@@ -102,32 +98,6 @@ class UserAdapter(private var listner : OnItemClickLister,val context : Context)
                 }
             }
         }
-        fun setReminderNotification(reminder: User,context : Context) {
-            // Check if the reminder time is in the future
-            val currentTime = System.currentTimeMillis()
-
-            // If the reminder's time is in the future, set the notification
-            if (reminder.timeStamp > currentTime.toString()) {
-                // Create a notification intent
-                val intent = Intent(context , NotificationReceiver::class.java).apply {
-                    putExtra("reminderTitle" , reminder.noteTitle)
-                    putExtra("reminderTime" , reminder.timeStamp)
-                }
-
-                // Create a PendingIntent to trigger the notification
-                val pendingIntent = PendingIntent.getBroadcast(
-                        context ,
-                        reminder.timeStamp.toInt() ,  // Use the reminder time as a unique ID
-                        intent ,
-                        PendingIntent.FLAG_UPDATE_CURRENT
-                                                              )
-
-                // Set the notification using AlarmManager
-                val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-                alarmManager.setExact(AlarmManager.RTC_WAKEUP , reminder.timeStamp.toLong() , pendingIntent)
-            }
-        }
-
 
     }
 
