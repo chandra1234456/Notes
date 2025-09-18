@@ -25,6 +25,7 @@
             android:drawableTint="@color/black"
             android:hint="Type to search..."
             android:padding="8dp"
+            android:singleLine="true"
             android:maxLines="1"
             android:textColorHint="@color/black" />
 

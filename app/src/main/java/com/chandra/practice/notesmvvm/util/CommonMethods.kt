@@ -1,6 +1,7 @@
 package com.chandra.practice.notesmvvm.util
 
 import android.content.Context
+import android.util.Log
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
@@ -30,3 +31,19 @@ fun formatTimestamp(timestamp: String): String {
     val dateFormat = SimpleDateFormat("dd MMM yyyy HH:mm", Locale.getDefault())
     return dateFormat.format(Date(timestamp))
 }
+
+inline fun tryCatch(
+    tag: String = "TAG",
+    onError: (Exception) -> Unit = { e ->
+        Log.d(tag, "Exception: ${e.message}", e)
+    },
+    block: () -> Unit
+                   ) {
+    try {
+        block()
+    } catch (e: Exception) {
+        onError(e)
+    }
+}
+
+

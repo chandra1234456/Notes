@@ -45,10 +45,8 @@ class NoteFragment : Fragment() {
         val currentDate = sdf.format(Date())
         //fullDate
          val currentDateTimeString = DateFormat.getDateTimeInstance().format(Date())
-        Log.d("TAG" , "onCreateView: ${formatDateString(currentDate)}")
         noteBinding.tvDate.text = formatDateString(currentDate)
         noteBinding.addNoteFab.setOnClickListener {
-
             userViewModel.insert(
                     User(
                             noteTitle = noteBinding.tieNoteTitle.text.toString() ,
@@ -70,14 +68,11 @@ class NoteFragment : Fragment() {
         return noteBinding.root
     }
     private fun formatDateString(inputDate: String): String {
-        // Define the input date format
-        val inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
-        // Parse the input date
+        // Accepts single- or double-digit day/month
+        val inputFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HH:mm:ss")
         val dateTime = LocalDateTime.parse(inputDate, inputFormatter)
 
-        // Define the output date format
         val outputFormatter = DateTimeFormatter.ofPattern("dd MMM, yyyy")
-        // Format the date to the desired output
         return dateTime.format(outputFormatter)
     }
 
@@ -147,7 +142,8 @@ class NoteFragment : Fragment() {
         val hour12 = if (hour % 12 == 0) 12 else hour % 12
         val formattedTime = "$hour12:${String.format("%02d", minute)} $amPm"
 
-        return "Selected Date: $formattedDate\nSelected Time: $formattedTime"
+        return "$formattedDate $formattedTime"
+       // return "Selected Date: $formattedDate\nSelected Time: $formattedTime"
     }
 
     // Check if the selected time is in the past compared to the current system time

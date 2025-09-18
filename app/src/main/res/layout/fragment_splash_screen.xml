@@ -1,10 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/splash_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <!-- Second screen content: For example, a logo or text -->
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:contentDescription="note"
+        android:translationY="500dp"
+        android:src="@drawable/ic_splash_icon" />
+
+    <!-- Third screen: full color overlay, initially invisible -->
+    <View
+        android:id="@+id/colorOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#9990FF"
+        android:visibility="gone"
+        android:alpha="0" />
+
+</FrameLayout>
+
+<!--
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:background="#FFFFFF"
     android:orientation="vertical"
     tools:context=".fragments.SplashScreenFragment">
 
@@ -15,7 +45,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="328dp"
         android:contentDescription="note"
-        android:src="@drawable/ic_notes"
+        android:src="@drawable/ic_splash_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,10 +57,11 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:gravity="center"
+        android:visibility="gone"
         android:layout_marginTop="20dp"
         android:text="Create Your Own Note"
-        android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textColor="#6B4EFF"
+        android:textSize="18sp"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -43,7 +74,7 @@
         android:layout_marginHorizontal="10dp"
         android:text="Developed By Chandra"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="normal"
         android:gravity="center"
         android:layout_marginBottom="30dp"
@@ -52,4 +83,4 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>-->

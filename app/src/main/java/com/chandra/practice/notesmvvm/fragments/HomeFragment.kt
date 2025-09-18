@@ -1,7 +1,9 @@
 package com.chandra.practice.notesmvvm.fragments
 
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.CalendarContract
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -32,7 +34,7 @@ class HomeFragment : Fragment() , UserAdapter.OnItemClickLister {
     private lateinit var userViewModel : UserViewModel
     private lateinit var userAdapter : UserAdapter
     private lateinit var homeBinding : FragmentHomeBinding
-    private  var userList: ArrayList<User> = ArrayList()
+    private var userList : ArrayList<User> = ArrayList()
     private var isLinearLayout = true // To keep track of layout state
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -51,7 +53,7 @@ class HomeFragment : Fragment() , UserAdapter.OnItemClickLister {
 
         // userViewModel.deleteAll()
         userViewModel.users.observe(viewLifecycleOwner) { users ->
-            GlobalScope.launch(Dispatchers.IO){
+            GlobalScope.launch(Dispatchers.IO) {
                 Log.d("TAG" , "onCreateView: $users")
                 userList.clear()
                 withContext(Dispatchers.Main) {
@@ -69,52 +71,93 @@ class HomeFragment : Fragment() , UserAdapter.OnItemClickLister {
 
 
         homeBinding.addFab.setOnClickListener {
-            findNavController().navigate(R.id.noteFragment)
+            addCalenderDateAndRemainder()
+            //findNavController().navigate(R.id.noteFragment)
         }
         homeBinding.searchBar.setOnClickListener {
             val bundle = Bundle().apply {
-                putParcelableArrayList("userList", userList)  // Convert MutableList to ArrayList
+                putParcelableArrayList("userList" , userList)  // Convert MutableList to ArrayList
             }
-            findNavController().navigate(R.id.searchFragment,bundle)
+            findNavController().navigate(R.id.searchFragment , bundle)
         }
 
         homeBinding.ivShuffle.setOnClickListener {
             toggleLayoutManager()
         }
-       return homeBinding.root
+        return homeBinding.root
     }
+
     private fun toggleLayoutManager() {
         if (isLinearLayout) {
             // Switch to StaggeredGridLayoutManager
-            homeBinding.recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-            homeBinding.ivShuffle.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_grid_view))
+            homeBinding.recyclerView.layoutManager =
+                StaggeredGridLayoutManager(2 , StaggeredGridLayoutManager.VERTICAL)
+            homeBinding.ivShuffle.setImageDrawable(
+                    ContextCompat.getDrawable(
+                            requireContext() ,
+                            R.drawable.ic_grid_view
+                                             )
+                                                  )
         } else {
-            homeBinding.ivShuffle.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_list))
+            homeBinding.ivShuffle.setImageDrawable(
+                    ContextCompat.getDrawable(
+                            requireContext() ,
+                            R.drawable.ic_list
+                                             )
+                                                  )
             // Switch back to LinearLayoutManager
             homeBinding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         }
 
         // Toggle layout type
-        isLinearLayout = !isLinearLayout
+        isLinearLayout = ! isLinearLayout
     }
-    override fun editTheUser(position: Int, user: User) {
+
+    override fun editTheUser(position : Int , user : User) {
         val action = HomeFragmentDirections.actionHomeFragmentToEditNoteFragment(user)
         findNavController().navigate(action)
-        Toast.makeText(requireContext(), "Edit", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext() , "Edit" , Toast.LENGTH_SHORT).show()
     }
 
     override fun deleteTheUser(position : Int , user : User) {
         //userViewModel.deleteAll(user)
         showSnackBar(
-                context = requireContext(),
-                view = homeBinding.rootView,
-                message = "Item deleted",
-                actionText = "UNDO",
+                context = requireContext() ,
+                view = homeBinding.rootView ,
+                message = "Item deleted" ,
+                actionText = "UNDO" ,
                 actionListener = {
-                   userViewModel.insert(user)
+                    userViewModel.insert(user)
                     // Code to undo the delete action
                 }
                     )
     }
+
+    /**
+     * TODO
+     * This is Google Calender Remainder
+     */
+    private fun addCalenderDateAndRemainder() {
+        val intent = Intent(Intent.ACTION_INSERT)
+        intent.setData(CalendarContract.Events.CONTENT_URI)
+        intent.putExtra(CalendarContract.Events.TITLE , "Hello")
+        intent.putExtra(CalendarContract.Events.DESCRIPTION , "Description")
+        intent.putExtra(CalendarContract.Events.EVENT_LOCATION , "Location")
+        intent.putExtra(CalendarContract.Events.ALL_DAY , "true")
+        intent.putExtra(Intent.EXTRA_EMAIL , "")
+        if (intent.resolveActivity(requireContext().packageManager) != null) {
+            startActivity(intent)
+            //finish()
+        } else {
+            Toast.makeText(
+                    requireContext() ,
+                    "There is no app that support this action" ,
+                    Toast.LENGTH_SHORT
+                          ).show()
+        }
+
+
+    }
+
 
 }
