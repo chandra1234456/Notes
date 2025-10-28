@@ -1,16 +1,17 @@
 package com.chandra.practice.notesmvvm
 
-import android.content.ClipDescription
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class UserViewModel(private val repository: UserRepository) : ViewModel() {
+class UserViewModel(
+    private val repository: UserRepository
+) : ViewModel() {
 
-    private val _users = MutableLiveData<List<User>>()
-    val users: LiveData<List<User>> get() = _users
+    private val _users = MutableStateFlow<List<User>>(emptyList())
+    val users: StateFlow<List<User>> get() = _users
 
     fun insert(user: User) {
         viewModelScope.launch {
@@ -22,7 +23,9 @@ class UserViewModel(private val repository: UserRepository) : ViewModel() {
     // Fetches all users without needing a User parameter
     fun fetchAllUsers() {
         viewModelScope.launch {
-            _users.value = repository.getAllUsers() // Assuming this returns a List<User>
+            repository.getAllUsers().collect { userList ->
+                _users.value = userList // userList is List<User>, not Flow
+            }
         }
     }
 
@@ -32,15 +35,17 @@ class UserViewModel(private val repository: UserRepository) : ViewModel() {
             fetchAllUsers() // Fetches all users after deletion
         }
     }
+
     fun deleteAll() {
         viewModelScope.launch {
             repository.deleteAll()
             fetchAllUsers() // Fetches all users after deletion
         }
     }
-    fun updateByUserId(id :Long,noteTitle :String ,noteDescription : String,isEdited :Boolean) {
+
+    fun updateByUserId(id: Long, noteTitle: String, noteDescription: String, isEdited: Boolean) {
         viewModelScope.launch {
-            repository.updateByUserId(id,noteTitle,noteDescription,isEdited)
+            repository.updateByUserId(id, noteTitle, noteDescription, isEdited)
             fetchAllUsers() // Fetches all users after deletion
         }
     }

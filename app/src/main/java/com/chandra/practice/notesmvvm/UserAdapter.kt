@@ -14,8 +14,12 @@ import com.google.android.material.textview.MaterialTextView
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
+import android.view.animation.AnimationUtils
 
-class UserAdapter(private var listner : OnItemClickLister,val context : Context) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+class UserAdapter(
+    private var listner : OnItemClickLister,
+    val context : Context
+) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
     private var users: List<User> = listOf()
 
@@ -33,7 +37,7 @@ class UserAdapter(private var listner : OnItemClickLister,val context : Context)
         private val noteTimeStamp: MaterialTextView = itemView.findViewById(R.id.tvTimestamp)
         private val ivTimeStamp: ImageView = itemView.findViewById(R.id.ivTimeStamp)
         private val remainderMe: MaterialTextView =itemView.findViewById(R.id.tvRemainder)
-        private val cardView: MaterialCardView = itemView.findViewById(R.id.cardViewNote)
+         val cardView: MaterialCardView = itemView.findViewById(R.id.cardViewNote)
         private val isEdited : MaterialTextView = itemView.findViewById(R.id.tvNoteIsEdited)
 
         @RequiresApi(Build.VERSION_CODES.O)
@@ -113,6 +117,8 @@ class UserAdapter(private var listner : OnItemClickLister,val context : Context)
     override fun onBindViewHolder(holder: UserViewHolder , position: Int) {
         holder.bind(users[position],listner,context)
         Log.d("TAG" , "onBindViewHolder: ${users[position]}")
+        holder.cardView.clearAnimation()  // reset any previous animation
+        holder.cardView.startAnimation(AnimationUtils.loadAnimation(context,R.anim.recyclerview_slide_out_anim))
     }
 
     // Return the size of the dataset

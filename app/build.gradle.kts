@@ -28,6 +28,8 @@ android {
                          )
         }
         debug {
+             isMinifyEnabled = false
+            isShrinkResources = false
             isDebuggable = true
             proguardFiles(
                     getDefaultProguardFile("proguard-android-optimize.txt") ,
@@ -37,11 +39,11 @@ android {
     }
     viewBinding.enable = true
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 }
 
@@ -64,7 +66,6 @@ dependencies {
     kapt(libs.androidx.room.compiler) // Use kapt for annotation processing
     implementation(libs.androidx.room.ktx) // Add this line
 
-
     // Kotlin Coroutines
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
@@ -75,5 +76,14 @@ dependencies {
     //Navigation
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation (libs.androidx.navigation.ui.ktx)
+
+    // Play Services Location for FusedLocationProviderClient
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+    // Kotlin Coroutines (optional, for background tasks)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
+    // ---------------------------UI Testing--------------------
+    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.4.0-alpha06")
 
 }

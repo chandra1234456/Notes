@@ -1,6 +1,7 @@
 package com.chandra.practice.notesmvvm
 
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 class UserRepository(private val userDao: UserDao) {
@@ -11,7 +12,7 @@ class UserRepository(private val userDao: UserDao) {
         }
     }
 
-    suspend fun getAllUsers(): List<User> {
+    suspend fun getAllUsers(): Flow<List<User>> {
         return withContext(Dispatchers.IO) {
             userDao.getAllUsers()
         }

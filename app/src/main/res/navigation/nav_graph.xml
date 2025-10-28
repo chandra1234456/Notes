@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_noteFragment"
-            app:destination="@id/noteFragment" />
+            app:destination="@id/noteFragment"
+            app:popEnterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_left"/>
         <action
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
@@ -36,6 +38,11 @@
         <action
             android:id="@+id/action_splashScreenFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <argument
+            android:name="integer"
+            app:argType="integer[]"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -57,4 +64,8 @@
         android:name="com.chandra.practice.notesmvvm.fragments.OnBoardingFragment"
         android:label="fragment_on_boarding"
         tools:layout="@layout/fragment_on_boarding" />
+    <fragment
+        android:id="@+id/collapsingToolbarLayoutFragment"
+        android:name="com.chandra.practice.notesmvvm.fragments.CollapsingToolbarLayoutFragment"
+        android:label="CollapsingToolbarLayoutFragment" />
 </navigation>

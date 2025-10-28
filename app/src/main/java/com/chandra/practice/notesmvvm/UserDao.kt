@@ -3,6 +3,7 @@ package com.chandra.practice.notesmvvm
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface UserDao {
@@ -10,7 +11,7 @@ interface UserDao {
     suspend fun insert(user : User)
 
     @Query("SELECT * FROM users")
-    suspend fun getAllUsers() : List<User>
+    fun getAllUsers() : Flow<List<User>>
 
     @Query("DELETE FROM users WHERE id = :id")
     suspend fun deleteNoteById(id: Long)

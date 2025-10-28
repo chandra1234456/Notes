@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".fragments.OnBoardingFragment">
 
     <LinearLayout
@@ -21,12 +22,14 @@
             android:layout_marginTop="60dp"
             android:text="Note-Taking App"
             android:textAlignment="center"
+            android:textColor="@color/textPrimary"
             android:textSize="24sp" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="90dp"
+            android:contentDescription="splashscreen"
             android:src="@drawable/diary" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -35,6 +38,7 @@
             android:layout_marginTop="100dp"
             android:text="Save and share notes"
             android:textAlignment="center"
+            android:textColor="@color/textPrimary"
             android:textSize="24sp" />
 
         <com.google.android.material.button.MaterialButton

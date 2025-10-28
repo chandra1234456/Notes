@@ -1,103 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root_view"
-    android:background="@color/white"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
+    <!-- Header Layout using ConstraintLayout for better control -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:baselineAligned="false"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true">
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <!-- Greeting and Title -->
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/textContainer"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_marginEnd="8dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ivDarkTheme"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/greetingText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/sofia_pro_medium"
                 android:text="Hello,"
                 android:textColor="#000000"
-                android:textSize="28sp"
-                android:fontFamily="@font/sofia_pro_medium"/>
+                android:textSize="28sp" />
 
-            <!-- Title Text -->
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/notesTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/sofia_pro_medium"
                 android:text="My Notes"
                 android:textColor="#000000"
-                android:textSize="28sp"
-                android:fontFamily="@font/sofia_pro_medium" />
-
+                android:textSize="28sp" />
         </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center"
-        android:layout_weight="1">
 
+        <!-- Shuffle Icon -->
         <ImageView
             android:id="@+id/ivShuffle"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_gravity="end"
-            android:layout_marginEnd="20dp"
-            android:contentDescription="image"
-            android:src="@drawable/ic_list"/>
+            android:contentDescription="shuffle"
+            android:src="@drawable/ic_list"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/ivDarkTheme"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:contentDescription="DARK MODE"
+            android:src="@drawable/ic_dark_mode"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ivShuffle"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
+    <!-- Location Address -->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/locationAddress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:drawableStart="@drawable/ic_location_pin"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:fontFamily="@font/sofia_pro_medium"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:paddingEnd="20dp"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:text="Location Address That Is Too Long To Fit In One Line And Needs Scrolling"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout" />
 
-    </LinearLayout>
-
+    <!-- Search Bar BELOW Location -->
     <com.google.android.material.search.SearchBar
         android:id="@+id/searchBar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout"
+        android:layout_marginTop="8dp"
         android:drawableStart="@drawable/ic_search"
-        android:drawablePadding="8dp"
+        android:drawablePadding="4dp"
         android:hint="Search Here"
         android:imeOptions="actionSearch"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:textColor="#000000"
         android:textColorHint="#999999"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/locationAddress" />
 
-
+    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/searchBar"
-        android:layout_marginTop="2dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchBar"
         tools:listitem="@layout/item_user" />
 
 
+    <!-- Floating Action Button -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="end"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="20dp"
-        android:contentDescription="image"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="14dp"
+        android:contentDescription="Add note"
         android:src="@drawable/baseline_add_24"
-        app:fabSize="normal" />
-</RelativeLayout>
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addNotification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="14dp"
+        android:contentDescription="Add note"
+        android:src="@drawable/baseline_add_24"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/addFab" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

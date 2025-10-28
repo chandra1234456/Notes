@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="dark_primary">#BB86FC</color>
+    <color name="dark_on_primary">#000000</color>
+    <color name="background">#E91212</color> <!-- dark background -->
+    <!--<color name="background">#121212</color> -->
+    <color name="textPrimary">#FFFFFF</color> <!-- white text -->
+
+</resources>

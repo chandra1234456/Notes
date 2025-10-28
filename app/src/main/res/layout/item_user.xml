@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:background="@color/background"
     android:padding="2dp">
 
     <com.google.android.material.card.MaterialCardView
@@ -62,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/sofia_pro_medium"
                 android:text="Title"
-                android:textColor="@color/black"
+                android:textColor="@color/textPrimary"
                 android:textSize="20sp" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -71,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/sofia_pro_regular"
                 android:text="Description"
-                android:textColor="#656565"
+                android:textColor="@color/textPrimary"
                 android:textSize="18sp" />
 
             <LinearLayout

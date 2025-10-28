@@ -9,5 +9,9 @@
     <color name="primary_light">#BB86FC</color> <!-- Example light primary color -->
     <color name="primary_dark">#3700B3</color> <!-- Example dark primary color -->
     <color name="blue">#3F51B5</color> <!-- Change to your preferred shade of blue -->
+    <color name="light_primary">#6200EE</color>
+    <color name="light_on_primary">#FFFFFF</color>
+    <color name="background">#FFFFFF</color> <!-- white background -->
+    <color name="textPrimary">#000000</color> <!-- black text -->
 
 </resources>

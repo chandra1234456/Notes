@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -36,6 +38,16 @@ class NoteFragment : Fragment() {
         savedInstanceState : Bundle? ,
                              ) : View {
         noteBinding = FragmentNoteBinding.inflate(layoutInflater)
+        ViewCompat.setOnApplyWindowInsetsListener(noteBinding.root) { view, insets ->
+            val systemInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.setPadding(
+                systemInsets.left,
+                systemInsets.top,
+                systemInsets.right,
+                systemInsets.bottom
+            )
+            insets
+        }
         val dao = AppDatabase.getDatabase(requireContext()).userDao()
         val repository = UserRepository(dao)
         val factory = UserViewModelFactory(repository)
@@ -56,6 +68,7 @@ class NoteFragment : Fragment() {
                             isEdited = false
                         )
                                 )
+            Log.d("", "onCreateView: ${noteBinding.tvRemainedMe.text}")
             Toast.makeText(requireContext() , "Inserted" , Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.homeFragment)
         }
