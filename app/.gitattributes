@@ -26,3 +26,39 @@
 *.jar binary
 *.so binary
 *.apk binary
+
+
+# Kotlin & Java source files
+*.kt text eol=lf
+*.kts text eol=lf
+*.java text eol=lf
+
+# XML files (layouts, menus, navigation, resources)
+*.xml text eol=lf
+
+# Gradle files
+*.gradle text eol=lf
+*.gradle.kts text eol=lf
+
+# Properties, TOML
+*.properties text eol=lf
+*.toml text eol=lf
+
+# Markdown, JSON, TXT
+*.md text eol=lf
+*.json text eol=lf
+*.txt text eol=lf
+
+# Scripts (bash, shell)
+*.sh text eol=lf
+
+# Binary files (images, libraries)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.jar binary
+*.so binary
+*.apk binary
+
