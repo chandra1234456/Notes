@@ -1,0 +1,28 @@
+# Kotlin & Java source files
+*.kt text eol=lf
+*.kts text eol=lf
+*.java text eol=lf
+
+# XML files (layouts, resources, etc.)
+*.xml text eol=lf
+
+# Gradle files
+*.gradle text eol=lf
+*.gradle.kts text eol=lf
+
+# TOML files
+*.toml text eol=lf
+
+# Markdown, text, and JSON
+*.md text eol=lf
+*.txt text eol=lf
+*.json text eol=lf
+
+# Ignore binary files
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+*.jar binary
+*.so binary
+*.apk binary

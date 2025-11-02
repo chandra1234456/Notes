@@ -68,4 +68,8 @@
         android:id="@+id/collapsingToolbarLayoutFragment"
         android:name="com.chandra.practice.notesmvvm.fragments.CollapsingToolbarLayoutFragment"
         android:label="CollapsingToolbarLayoutFragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.chandra.practice.notesmvvm.fragments.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

@@ -13,8 +13,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.annotation.RequiresPermission
 import androidx.appcompat.app.AppCompatDelegate
@@ -36,8 +36,6 @@ import com.chandra.practice.notesmvvm.UserRepository
 import com.chandra.practice.notesmvvm.UserViewModel
 import com.chandra.practice.notesmvvm.UserViewModelFactory
 import com.chandra.practice.notesmvvm.databinding.FragmentHomeBinding
-import com.chandra.practice.notesmvvm.notification.NotificationUtil
-import com.chandra.practice.notesmvvm.util.NetworkObserver
 import com.chandra.practice.notesmvvm.util.showSnackBar
 import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -112,7 +110,8 @@ class HomeFragment : Fragment() , UserAdapter.OnItemClickLister {
         }
 
         homeBinding.ivShuffle.setOnClickListener {
-            toggleLayoutManager()
+          //  toggleLayoutManager()
+            showPopupMenu(it)
         }
         homeBinding.addNotification.setOnClickListener {
             findNavController().navigate(R.id.collapsingToolbarLayoutFragment)
@@ -254,6 +253,31 @@ class HomeFragment : Fragment() , UserAdapter.OnItemClickLister {
 
     override fun onDestroyView() {
         super.onDestroyView()
+    }
+
+    private fun showPopupMenu(view: View?) {
+        val popupMenu = PopupMenu(requireContext(), view)
+        popupMenu.menuInflater.inflate(R.menu.popup_menu, popupMenu.menu)
+
+        popupMenu.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.menu_grid_size -> {
+                    Toast.makeText(requireContext(), "Grid Size", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.menu_settings -> {
+                    findNavController().navigate(R.id.settingsFragment)
+                    Toast.makeText(requireContext(), "Settings", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.menu_sort_by -> {
+                    Toast.makeText(requireContext(), "Sort By", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                else -> false
+            }
+        }
+        popupMenu.show()
     }
 
 

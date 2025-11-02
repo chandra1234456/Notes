@@ -16,6 +16,9 @@ roomRuntime = "2.6.1"
 uiDesktop = "1.7.0"
 navigationFragment = "2.8.4"
 coreI18n = "1.0.0-alpha01"
+preference = "1.2.1"
+navigationFragmentKtx = "2.9.5"
+navigationUiKtxVersion = "2.9.5"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -39,6 +42,9 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 androidx-ui-desktop = { group = "androidx.compose.ui", name = "ui-desktop", version.ref = "uiDesktop" }
 androidx-navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "navigationFragment" }
 androidx-core-i18n = { group = "androidx.core", name = "core-i18n", version.ref = "coreI18n" }
+androidx-preference = { group = "androidx.preference", name = "preference", version.ref = "preference" }
+navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
+navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtxVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
