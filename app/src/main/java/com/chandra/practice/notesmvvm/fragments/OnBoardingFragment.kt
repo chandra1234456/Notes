@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.fragment.findNavController
 import com.chandra.practice.notesmvvm.R
 import com.chandra.practice.notesmvvm.databinding.FragmentOnBoardingBinding
@@ -19,6 +21,16 @@ class OnBoardingFragment : Fragment() {
         savedInstanceState : Bundle? ,
                              ) : View {
         onBoardingBinding = FragmentOnBoardingBinding.inflate(layoutInflater)
+        ViewCompat.setOnApplyWindowInsetsListener(onBoardingBinding.root) { view, insets ->
+            val systemInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.setPadding(
+                systemInsets.left,
+                systemInsets.top,
+                systemInsets.right,
+                systemInsets.bottom
+            )
+            insets
+        }
         return onBoardingBinding.root
     }
 

@@ -86,7 +86,11 @@ class HomeFragment : Fragment() , UserAdapter.OnItemClickLister {
                 userList.clear()
                 userList.addAll(users)
                 Log.d("TAG", "Fetched users: $users")
+                if (users.isNotEmpty()){
                 userAdapter.setUsers(users)
+                }else{
+                  homeBinding.ivNoData.visibility = View.VISIBLE
+                }
             }
         }
 

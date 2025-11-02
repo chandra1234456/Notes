@@ -8,6 +8,8 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,10 +30,22 @@ class SearchFragment : Fragment() {
         savedInstanceState : Bundle? ,
                              ) : View {
         searchBinding = FragmentSearchBinding.inflate(layoutInflater)
+        ViewCompat.setOnApplyWindowInsetsListener(searchBinding.root) { view, insets ->
+            val systemInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.setPadding(
+                systemInsets.left,
+                systemInsets.top,
+                systemInsets.right,
+                systemInsets.bottom
+            )
+            insets
+        }
+
+
         searchBinding.cancel.setOnClickListener {
             findNavController().navigate(R.id.homeFragment)
         }
-        searchBinding.tvNoRecordFound.visibility =View.VISIBLE
+        searchBinding.ivNoRecord.visibility =View.VISIBLE
         searchBinding.recyclerView.visibility =View.GONE
 
         adapter = UserSearchAdapter(filteredUserList) // Initialize your adapter with the filtered list
@@ -48,10 +62,10 @@ class SearchFragment : Fragment() {
                 if (searchText.isNotEmpty()) {
                     filterList(searchText)
                     searchBinding.recyclerView.visibility =View.VISIBLE
-                    searchBinding.tvNoRecordFound.visibility = View.GONE
+                    searchBinding.ivNoRecord.visibility = View.GONE
                 }else{
                     searchBinding.recyclerView.visibility = View.GONE
-                    searchBinding.tvNoRecordFound.visibility = View.VISIBLE
+                    searchBinding.ivNoRecord.visibility = View.VISIBLE
                 }
             }
 
@@ -93,7 +107,7 @@ class SearchFragment : Fragment() {
                     filteredUserList.add(user)
                 }else{
                     searchBinding.recyclerView.visibility =View.GONE
-                    searchBinding.tvNoRecordFound.visibility =View.VISIBLE
+                    searchBinding.ivNoRecord.visibility =View.VISIBLE
                 }
             }
         }

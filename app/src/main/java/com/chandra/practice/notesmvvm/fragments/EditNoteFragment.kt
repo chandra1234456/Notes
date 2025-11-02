@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.chandra.practice.notesmvvm.AppDatabase
@@ -36,6 +38,16 @@ class EditNoteFragment : Fragment() {
         savedInstanceState : Bundle? ,
                              ) : View {
         editNoteBinding = FragmentEditNoteBinding.inflate(layoutInflater)
+        ViewCompat.setOnApplyWindowInsetsListener(editNoteBinding.root) { view, insets ->
+            val systemInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.setPadding(
+                systemInsets.left,
+                systemInsets.top,
+                systemInsets.right,
+                systemInsets.bottom
+            )
+            insets
+        }
         val dao = AppDatabase.getDatabase(requireContext()).userDao()
         val repository = UserRepository(dao)
         val factory = UserViewModelFactory(repository)

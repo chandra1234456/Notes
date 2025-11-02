@@ -5,11 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
+    android:background="@color/white"
     tools:context=".fragments.SearchFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
         android:orientation="horizontal">
 
         <EditText
@@ -18,8 +20,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
+            android:autofillHints="sbx"
             android:background="@drawable/bg_search"
-            android:drawableStart="@drawable/ic_search"
+            android:drawableStart="@drawable/ic_search_png"
             android:drawablePadding="8dp"
             android:drawableEnd="@drawable/ic_close"
             android:drawableTint="@color/black"
@@ -53,15 +56,14 @@
             android:layout_width="match_parent"
             android:visibility="gone"
             android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/tvNoRecordFound"
+        <ImageView
+            android:id="@+id/ivNoRecord"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:textSize="21sp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/sofia_pro_regular"
-            android:text="No Record Found !!!" />
+            android:background="@color/white"
+            android:src="@drawable/search"
+             />
 
     </LinearLayout>
 

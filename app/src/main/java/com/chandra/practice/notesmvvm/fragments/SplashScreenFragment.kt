@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.chandra.practice.notesmvvm.R
@@ -18,6 +20,16 @@ class SplashScreenFragment : Fragment() {
         savedInstanceState : Bundle? ,
                              ) : View {
         splashScreenBinding = FragmentSplashScreenBinding.inflate(inflater , container , false)
+        ViewCompat.setOnApplyWindowInsetsListener(splashScreenBinding.root) { view, insets ->
+            val systemInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.setPadding(
+                systemInsets.left,
+                systemInsets.top,
+                systemInsets.right,
+                systemInsets.bottom
+            )
+            insets
+        }
         /* Handler().postDelayed({
              // Navigate to the main fragment or activity after delay
              moveToHomeFragment()
