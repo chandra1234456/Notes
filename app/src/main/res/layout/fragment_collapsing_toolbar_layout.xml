@@ -12,7 +12,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="100dp"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.Material3.Dark.ActionBar">
 
@@ -20,11 +20,9 @@
             android:id="@+id/collapsingToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorSurface"
             app:expandedTitleTextAppearance="@style/TextAppearance.Material3.DisplaySmall"
             app:collapsedTitleTextAppearance="@style/TextAppearance.Material3.TitleMedium"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:layout_scrollFlags="scroll"
             app:expandedTitleMarginStart="24dp"
             app:expandedTitleMarginEnd="48dp">
 
@@ -38,7 +36,8 @@
                 android:contentDescription="header_image"
                 android:fitsSystemWindows="true"
                 app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier="0.7" />
+                android:layout_gravity="center|end"
+                android:layout_marginBottom="1dp" />
 
             <!-- Toolbar -->
             <com.google.android.material.appbar.MaterialToolbar
